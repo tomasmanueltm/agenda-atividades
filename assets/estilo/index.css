@@ -74,6 +74,12 @@ header h3 {
   font-weight: 900;
 }
 
+@media (max-width: 425px) {
+  header h3 {
+    font-size: 1.5rem;
+  }
+}
+
 header .social {
   padding: 1rem;
 }
@@ -95,8 +101,10 @@ section {
 
 section .painel-msg {
   width: 100%;
+  bottom: 0px;
   height: 80vh;
   padding: 2rem;
+  position: absolute;
 }
 
 section .painel-msg .enveloper {
@@ -112,7 +120,7 @@ section .painel-msg .enveloper i {
 section .item {
   right: 0px;
   bottom: 0px;
-  height: 88%;
+  height: 80%;
   width: 150px;
   position: absolute;
   align-items: flex-end;
@@ -122,7 +130,7 @@ section .item {
 section .item .items {
   top: 0px;
   right: 0px;
-  height: 80.8vh;
+  height: 80vh;
   padding: 1rem;
   position: absolute;
 }
@@ -210,7 +218,7 @@ section .item .adicionar:hover div {
 
 .formulario {
   z-index: 1;
-  width: 35%;
+  width: 38%;
   margin: 0 auto;
   position: relative;
   border-radius: 5px;
@@ -238,19 +246,29 @@ section .item .adicionar:hover div {
   font-family: Poppin !important;
 }
 
-.formulario div {
+.formulario div.input {
   width: 100%;
-  margin-block: 1rem;
+  margin-block: 0 1rem;
+}
+
+.formulario div.input label {
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 400;
+}
+
+.formulario div.input input, .formulario div.input select, .formulario div.input textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  outline: none;
+  padding: .5rem;
   border-radius: 3px;
   background: var(--atual);
 }
 
-.formulario div input {
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: .5rem;
-  background: transparent;
+.formulario div.input textarea {
+  height: 100px;
 }
 
 .formulario button {
@@ -272,6 +290,48 @@ section .item .adicionar:hover div {
 
 .form-agenda {
   display: none;
+}
+
+.form-tarefa {
+  display: none;
+}
+
+.form-tarefa fieldset {
+  border-radius: 5px;
+  padding: 1rem .3rem;
+  margin-block-end: 1rem;
+}
+
+.form-tarefa fieldset legend {
+  font-weight: 400;
+  color: var(--atual);
+}
+
+.form-tarefa fieldset .input {
+  margin-block: 0px;
+}
+
+.form-tarefa .group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  grid-gap: 1rem;
+}
+
+@media (max-width: 425px) {
+  .form-tarefa .group {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-tarefa .group.none {
+  grid-template-columns: repeat(var(--gr), 1fr);
+}
+
+@media (max-width: 425px) {
+  .form-tarefa .group.none {
+    grid-template-columns: 1fr;
+  }
 }
 
 .screen {

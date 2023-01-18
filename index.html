@@ -18,12 +18,12 @@
             <a href="http://www.linkedin.com/in/tomasmanueltm" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
         </div>
     </header>
-
+   
 
     <section class="page flex">
         <div class="painel-msg flex">
             <div class="enveloper">
-                <i class="bi bi-env"></i>
+                <i class="bi bi-env"  id="pagina"></i>
                 <h2>Sem registros na agenda</h2>
             </div>
         </div>
@@ -34,12 +34,12 @@
             
             <aside class="adicionar flex">
                
-                <div class="flex">
+                <div class="flex" onclick="formulario('agenda')">
                     <span>Agenda</span>
                     <i class="bi bi-agenda-msg fc"></i>
                 </div>  
 
-                <div class="flex">
+                <div class="flex" onclick="formulario('tarefa')">
                     <span>Tarefas</span>
                     <i class="bi bi-agenda-new fc"></i>
                 </div>  
@@ -55,19 +55,11 @@
     </section>
 
 <!-- form-cadastro -->
-<div class=" form-agenda">
 
-    <section class="formulario fc">
-        <h3>Nova agenda</h3>
-        <div>
-            <input type="text" placeholder="Digite seu titulo" name="titulo">
-        </div>
-        <button>Salvar</button>
-    </section>
 
-</div>    
 
-<script src=""></script>
+
+<script src="assets/src/funcoes.js" defer></script>
 
 </body>
 </html>
