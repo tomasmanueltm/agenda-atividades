@@ -85,11 +85,20 @@ section {
   padding: 2rem;
 }
 
-section .registros {
+section .painel-msg {
   width: 80%;
   height: 80vh;
-  display: block;
-  background: var(--padrao);
+  padding: 2rem;
+}
+
+section .painel-msg .enveloper {
+  margin: 0 auto;
+  text-align: center;
+}
+
+section .painel-msg .enveloper i {
+  font-size: 6rem;
+  margin-block: 2rem;
 }
 
 section .item {
