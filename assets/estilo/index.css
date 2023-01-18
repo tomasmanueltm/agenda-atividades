@@ -102,8 +102,8 @@ section {
 section .painel-msg {
   width: 100%;
   bottom: 0px;
-  height: 80vh;
-  padding: 2rem;
+  height: 76vh;
+  padding: 0px;
   position: absolute;
 }
 
@@ -115,6 +115,21 @@ section .painel-msg .enveloper {
 section .painel-msg .enveloper i {
   font-size: 6rem;
   margin-block: 2rem;
+}
+
+section .painel-msg .registros {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+section .painel-msg .registros div {
+  width: 205px;
+  padding: 1rem 2rem;
+  border-radius: .3rem;
+  margin-block: 0 1rem;
+  background: #222332;
+  display: inline-block;
 }
 
 section .item {
@@ -271,6 +286,29 @@ section .item .adicionar:hover div {
   height: 100px;
 }
 
+.formulario .group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  grid-gap: 1rem;
+}
+
+@media (max-width: 425px) {
+  .formulario .group {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formulario .group.none {
+  grid-template-columns: repeat(var(--gr), 1fr);
+}
+
+@media (max-width: 425px) {
+  .formulario .group.none {
+    grid-template-columns: 1fr;
+  }
+}
+
 .formulario button {
   color: #fff;
   margin: 0 auto;
@@ -309,29 +347,6 @@ section .item .adicionar:hover div {
 
 .form-tarefa fieldset .input {
   margin-block: 0px;
-}
-
-.form-tarefa .group {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr .5fr;
-  grid-gap: 1rem;
-}
-
-@media (max-width: 425px) {
-  .form-tarefa .group {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-tarefa .group.none {
-  grid-template-columns: repeat(var(--gr), 1fr);
-}
-
-@media (max-width: 425px) {
-  .form-tarefa .group.none {
-    grid-template-columns: 1fr;
-  }
 }
 
 .screen {

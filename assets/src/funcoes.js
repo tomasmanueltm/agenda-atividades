@@ -4,7 +4,7 @@
 // funcao select
 let seletor = (e) => document.querySelector(e),
     getId = (e)=> document.getElementById(e);
-
+    var items = localStorage;
 
 
 function formulario(tipo)
@@ -16,14 +16,22 @@ function formulario(tipo)
         case "agenda":
             form.classList.add("form-agenda");
             form.innerHTML = ` <section class="formulario fc" id="form-agenda">
-                        <h3>Nova agenda</h3> <div class="input">    
-                        <input type="text" placeholder="Digite seu titulo" id="agenda" name="titulo"> 
-                        </div> <button onclick="cadastrar('agenda')">Salvar</button> 
+                        <h3>Nova agenda</h3> 
+                        <div class="group">
+                            <div class="input">    
+                                <input type="text" placeholder="Digite seu titulo" id="agenda" name="titulo"> 
+                            </div> 
+                            <div class="input">    
+                                <input type="color" title="Escolha sua cor" id="cor" name="cor"> 
+                            </div> 
+                        </div>
+                        <button onclick="cadastrar('agenda')">Salvar</button> 
                     </section>`;
                     break;
         default:
             form.classList.add("form-tarefa");
-            form.innerHTML = ` <form class="formulario fc">
+            form.setAttribute("id", "form-tarefa");
+            form.innerHTML = ` <div class="formulario fc">
                 <h3>Nova agenda</h3>
                 <fieldset class="group none" style="--gr:1">
                 <legend>Definir</legend>               
@@ -32,13 +40,10 @@ function formulario(tipo)
                 <div class="group">
                     
                     <div class="input">
-                        <input type="text" placeholder="Digite nome da tarefa" name="titulo">
+                        <input type="text" id="titulo" placeholder="Digite nome da tarefa" name="titulo">
                         </div> <div class="input">
                             <select name="agenda" id="seleciona_agenda">
-                                <option value="" disabled selected>Seleciona agenda</option>
-                                <option value="">Profissional</option>
-                                <option value="">Pessoal</option>
-                                <option value="">Rotina</option>
+                                <option value="" disabled selected>Seleciona agenda</option>;
                             </select>
                         </div>
                 </div>
@@ -60,18 +65,19 @@ function formulario(tipo)
                 <div class="group none" style="--gr:1">
                     <div class="input">
                         <label for="">Mensagen</label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea placeholder="escreva sua mensagem" id="msg" cols="30" rows="10"></textarea>
                     </div>
                 </div>
 
-                <button>Salvar</button> </form>`;
-               
-            break;
-        }
-
-        form.classList.add("screen");
-        document.body.appendChild(form);
+                <button onclick="cadastrar('tarefa')">Salvar</button>  </div>`;
+                break;
+            }
+            
+            form.classList.add("screen");
+            document.body.appendChild(form);
+            comboBox();
         eventoClose();
+                
        
 };
 
@@ -116,6 +122,7 @@ function shake(e, distance, time) {
         } 
 }
 
+
 function cadastrar(valor)
 {
     switch (valor) {
@@ -126,14 +133,51 @@ function cadastrar(valor)
                 }
                 else
                 {
-                    agenda(getId("agenda").value);
+                    agenda(getId("agenda").value, getId("cor").value);
                     modalClose();
                 }
                
             break;
     
         default:
+            if(getId("seleciona_agenda").value.length == 0 || getId("titulo").value.length < 1 || getId("data_agenda").value.length < 1)
+            {
+                 shake("form-tarefa");
+            }
+            else
+            {
+                var index, 
+                data = 
+                agenda = getId("seleciona_agenda").value;
+    
+                var items = JSON.parse(localStorage.getItem("agenda"));
+                var registro =  items.filter(e=>{ return e.id == agenda});
+                var l = [];
+                l.push(...registro[0].tarefas);
+                l.join("")
+                l.push({
+                    titulo: getId("titulo").value,
+                    tipo: getId("seleciona_tipo").value,
+                    data: getId("data_agenda").value,
+                    smg: getId("msg").value
 
+               });
+
+               l.join("");
+
+               registro[0].tarefas = l;
+
+                items.forEach(e=>{
+                    if(e.id == registro[0].id)
+                    {
+                        e = registro;
+                    }
+                })
+                console.log(items);
+
+                localStorage.setItem("agenda", JSON.stringify(items));
+
+            }
             break;
     }
 }
@@ -141,45 +185,96 @@ function cadastrar(valor)
 
 
 // lista itens agenda
-function agenda(item)
+function agenda(item, cor)
 {
+    if(!cor) cor = "#222332";
     var data = new Date();
-    var items = localStorage;
 
     if(items.getItem("agenda") != null)
     {
         var lista = JSON.parse(items.getItem("agenda"));
         lista.push({
+            id: lista.length+1,
             agenda: item,
+            cor: cor,
+            tarefas: [],
             data : data.getDay()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()
         });
         items.setItem("agenda", JSON.stringify(lista));
+        seletor(".items").append(Componente("div", item[0], cor));
+
     }
     else
     {
         // salva
         var db  = [{
+            id: 1,
             agenda: item,
+            cor: cor,
+            tarefas: [],
             data : data.getDay()+"/"+data.getMonth()+"/"+data.getFullYear()
         }];
         items.setItem("agenda", JSON.stringify(db));
+        seletor(".items").append(Componente("div", item[0]));
     }
 }
 
-window.onload = function(){
+function Componente(ele, valor, cor,id)
+{
+    if(cor == null) cor = "#222332";   
+    var elemento = document.createElement(ele);
+    elemento.classList.add("flex");
+    elemento.innerText = valor;
+    elemento.setAttribute("style", "--cor:"+cor);
+    elemento.setAttribute("onclick", "Registro('"+id+"')");
+    return elemento;
+}
+
+function carregar(){
     var agendas = localStorage.getItem("agenda");
     if(agendas != null)
     {
         agendas = JSON.parse(agendas);
         agendas.forEach(agenda => {
-        var div = document.createElement("div");
-        div.classList.add("flex");
-        div.setAttribute("style", "--cor:#ffc10e");
-
-      
-            div.innerText = agenda.agenda[0];
-            seletor(".items").append(div)
-            
+            seletor(".items").append(Componente("div", agenda.agenda[0], agenda.cor, agenda.id));
         });
     }
 }
+
+carregar();
+
+
+function Registro(id = null)
+{
+    if((localStorage.getItem("agenda") == null && id == null))
+    {
+        seletor(".painel-msg").innerHTML =  `<div class="enveloper">
+                        <i class="bi bi-env"  id="pagina"></i>
+                        <h2>Sem registros na agenda</h2>
+                    </div>`;
+    }
+    
+    if(id != null)
+    {
+        let items = localStorage;
+        items = JSON.parse(items.getItem("agenda"));
+        var registro =  items.filter(e=>{return e.id == id});
+        console.log(registro);
+
+    }
+}
+
+Registro();
+
+function comboBox()
+{
+    let  agendas = (JSON.parse(localStorage.getItem("agenda")) || []);
+         agendas.forEach(agenda => {
+        var    opcao = document.createElement("option");
+            opcao.value = agenda.id;
+            opcao.innerText = agenda.agenda;
+            getId("seleciona_agenda").append(opcao);
+        });
+
+}
+
