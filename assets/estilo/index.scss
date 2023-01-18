@@ -55,39 +55,19 @@ header
         font-weight: 900; 
     }
 
-    ul
+    .social
     {
-        li
+        padding: 1rem;
+        a
         {
-            color: #fff;
-            margin: 0 1rem;
+            color: #eee;
             cursor: pointer;
-            font-weight: 500;
-            position: relative;
-            display: inline-block;
+            margin: 0 .3rem;
+            font-size: 1.2rem;
 
             &:hover
             {
                 color: var(--padrao);
-
-                ul
-                {
-                    display: block;
-                }
-            }
-
-            ul
-            {
-                display: none;
-                position: absolute;
-                padding: 1rem .9rem;
-                background: #222332;
-
-                li
-                {
-                    display: block;
-                    margin: 1rem 0;
-                }
             }
         }
     }
@@ -99,7 +79,7 @@ section
 
     .painel-msg
     {
-        width: 80%;
+        width: 100%;
         height: 80vh;
         padding: 2rem;
 
@@ -121,13 +101,13 @@ section
     .item
     {
         right: 0px;
-        width: 70px;
         bottom: 0px;
         height: 88%;
-        background: #fff;
+        width: 150px;
         position: absolute;
         align-items: flex-end;
         justify-content: center;
+        
         
         .items
         {
@@ -154,15 +134,65 @@ section
         }
         .adicionar
         {
-            right: 0px;
-            width: 40px;
-            height: 40px;
+            right: 0rem;
             bottom: 2rem;
-            cursor: pointer;
-            border-radius: 50%;
+            height: 140px;
+            flex-flow: column;
             position: relative;
-            background: orange;
-            justify-content: center;
+            overflow: hidden;
+            width: 555px;
+
+            div
+            {                
+                width: 125px;
+                height: 40px;
+                cursor: pointer;
+                position: relative;
+                margin-block: .3rem;
+                transform: translateY(100vh);
+                transition: transform .5s ease-out;
+
+
+                span
+                {
+                    right: -8px;
+                    font-weight: 900;
+                    border-radius: 5px;
+                    position: relative;
+                    padding: .1rem 0px;
+                    display: inline-block;
+                    border-bottom: 1px solid var(--padrao);
+                    text-transform: lowercase;
+                }
+                i
+                {
+                   
+                    width: 40px;
+                    height: 40px;
+                    flex-flow: column;
+                    border-radius: 50%;
+                    align-items: center;
+                    justify-content: center;
+                    background: var(--padrao);
+                }
+
+
+                &:last-child
+                {
+                    display: flex;
+                    transform: translateY(0px);
+                }
+            }
+            &:hover
+            {
+                height: 140px;
+                div
+                {
+                    display: flex!important;
+                    transform: translateY(0px);
+                    transition: transform .3s ease-out cubic-bezier(0.075, 0.82, 0.165, 1);
+                }
+            }
         }
     }
 }
@@ -176,7 +206,7 @@ section
     justify-content: space-between;
 }
 
-.flex-centro
+.fc
 {
     display: flex;
     flex-flow: column;

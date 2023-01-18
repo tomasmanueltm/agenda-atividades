@@ -69,33 +69,19 @@ header h3 {
   font-weight: 900;
 }
 
-header ul li {
-  color: #fff;
-  margin: 0 1rem;
+header .social {
+  padding: 1rem;
+}
+
+header .social a {
+  color: #eee;
   cursor: pointer;
-  font-weight: 500;
-  position: relative;
-  display: inline-block;
+  margin: 0 .3rem;
+  font-size: 1.2rem;
 }
 
-header ul li:hover {
+header .social a:hover {
   color: var(--padrao);
-}
-
-header ul li:hover ul {
-  display: block;
-}
-
-header ul li ul {
-  display: none;
-  position: absolute;
-  padding: 1rem .9rem;
-  background: #222332;
-}
-
-header ul li ul li {
-  display: block;
-  margin: 1rem 0;
 }
 
 section {
@@ -103,7 +89,7 @@ section {
 }
 
 section .painel-msg {
-  width: 80%;
+  width: 100%;
   height: 80vh;
   padding: 2rem;
 }
@@ -120,10 +106,9 @@ section .painel-msg .enveloper i {
 
 section .item {
   right: 0px;
-  width: 70px;
   bottom: 0px;
   height: 88%;
-  background: #fff;
+  width: 150px;
   position: absolute;
   align-items: flex-end;
   justify-content: center;
@@ -152,15 +137,59 @@ section .item .items div {
 }
 
 section .item .adicionar {
-  right: 0px;
+  right: 0rem;
+  bottom: 2rem;
+  height: 140px;
+  flex-flow: column;
+  position: relative;
+  overflow: hidden;
+  width: 555px;
+}
+
+section .item .adicionar div {
+  width: 125px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  margin-block: .3rem;
+  transform: translateY(100vh);
+  transition: transform .5s ease-out;
+}
+
+section .item .adicionar div span {
+  right: -8px;
+  font-weight: 900;
+  border-radius: 5px;
+  position: relative;
+  padding: .1rem 0px;
+  display: inline-block;
+  border-bottom: 1px solid var(--padrao);
+  text-transform: lowercase;
+}
+
+section .item .adicionar div i {
   width: 40px;
   height: 40px;
-  bottom: 2rem;
-  cursor: pointer;
+  flex-flow: column;
   border-radius: 50%;
-  position: relative;
-  background: orange;
+  align-items: center;
   justify-content: center;
+  background: var(--padrao);
+}
+
+section .item .adicionar div:last-child {
+  display: flex;
+  transform: translateY(0px);
+}
+
+section .item .adicionar:hover {
+  height: 140px;
+}
+
+section .item .adicionar:hover div {
+  display: flex !important;
+  transform: translateY(0px);
+  transition: transform 0.3s ease-out cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .flex {
@@ -170,7 +199,7 @@ section .item .adicionar {
   justify-content: space-between;
 }
 
-.flex-centro {
+.fc {
   display: flex;
   flex-flow: column;
   align-items: center;

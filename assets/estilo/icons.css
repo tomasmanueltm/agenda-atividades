@@ -60,4 +60,18 @@
   .bi-laptop::before { content: "\f456"; }
 
 
-  
+  .bi-agenda-new::before {
+    content: "\f263";
+}
+
+.bi-agenda-book::before {
+    content: "\f439";
+}
+
+.bi-agenda-msg::before {
+    content: "\f442";
+}
+
+.bi-agenda-gps::before {
+    content: "\f652";
+}
