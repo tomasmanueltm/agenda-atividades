@@ -19,6 +19,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .bi-prego::before {
+    content: "\f4ed";
+}
+.bi-env::before {
+  content: "\f261";
+}
+
   .bi-search::before { content: "\f52a"; }
   .bi-facebook::before { content: "\f344"; }
   .bi-github::before { content: "\f3ed"; }
