@@ -2,7 +2,7 @@
 
 
 // funcao select
-let $ = (e) => document.querySelector(e),
+let seletor = (e) => document.querySelector(e),
     getId = (e)=> document.getElementById(e);
 
 
@@ -10,16 +10,20 @@ let $ = (e) => document.querySelector(e),
 function formulario(tipo)
 {
     var form = document.createElement("div");
+    eventoClose();
     switch (tipo) 
     {
         case "agenda":
             form.classList.add("form-agenda");
-            form.innerHTML = ` <section class="formulario fc">
-                        <h3>Nova agenda</h3> <div class="input">    <input type="text" placeholder="Digite seu titulo" name="titulo"> </div> <button>Salvar</button> </section>`;
-        break;
+            form.innerHTML = ` <section class="formulario fc" id="form-agenda">
+                        <h3>Nova agenda</h3> <div class="input">    
+                        <input type="text" placeholder="Digite seu titulo" id="agenda" name="titulo"> 
+                        </div> <button onclick="cadastrar('agenda')">Salvar</button> 
+                    </section>`;
+                    break;
         default:
             form.classList.add("form-tarefa");
-            form.innerHTML = ` <section class="formulario fc">
+            form.innerHTML = ` <form class="formulario fc">
                 <h3>Nova agenda</h3>
                 <fieldset class="group none" style="--gr:1">
                 <legend>Definir</legend>               
@@ -60,29 +64,36 @@ function formulario(tipo)
                     </div>
                 </div>
 
-                <button>Salvar</button> </section>`;
+                <button>Salvar</button> </form>`;
+               
             break;
         }
 
         form.classList.add("screen");
         document.body.appendChild(form);
         eventoClose();
+       
 };
 
 function eventoClose(){
-    if($(".screen") != null)
+    if(seletor(".screen") != null)
     {
-        $(".screen").addEventListener("dblclick", function(e){
-            shake();
-           this.remove();
-            $(".screen").classList.toggle("screen");
+        seletor(".screen").addEventListener("dblclick", function(e){
+            modalClose();
         })
     }
 }
 
-function shake(e="pagina", distance, time) { 
+function modalClose(){
+    seletor(".screen").remove();
+}
+
+
+function shake(e, distance, time) { 
+
     if (typeof e === "string") e = document.getElementById(e);
 
+    if (!e) e = "pagina"; 
     if (!time) time = 800; 
     if (!distance) distance = 8;
     var originalStyle = e.style.cssText; 
@@ -105,11 +116,20 @@ function shake(e="pagina", distance, time) {
         } 
 }
 
-function salvar(valor)
+function cadastrar(valor)
 {
     switch (valor) {
         case 'agenda':
-            
+                if(getId("agenda").value.length < 1)
+                {
+                     shake("form-agenda");
+                }
+                else
+                {
+                    agenda(getId("agenda").value);
+                    modalClose();
+                }
+               
             break;
     
         default:
@@ -118,6 +138,48 @@ function salvar(valor)
     }
 }
 
-shake();
 
 
+// lista itens agenda
+function agenda(item)
+{
+    var data = new Date();
+    var items = localStorage;
+
+    if(items.getItem("agenda") != null)
+    {
+        var lista = JSON.parse(items.getItem("agenda"));
+        lista.push({
+            agenda: item,
+            data : data.getDay()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()
+        });
+        items.setItem("agenda", JSON.stringify(lista));
+    }
+    else
+    {
+        // salva
+        var db  = [{
+            agenda: item,
+            data : data.getDay()+"/"+data.getMonth()+"/"+data.getFullYear()
+        }];
+        items.setItem("agenda", JSON.stringify(db));
+    }
+}
+
+window.onload = function(){
+    var agendas = localStorage.getItem("agenda");
+    if(agendas != null)
+    {
+        agendas = JSON.parse(agendas);
+        agendas.forEach(agenda => {
+        var div = document.createElement("div");
+        div.classList.add("flex");
+        div.setAttribute("style", "--cor:#ffc10e");
+
+      
+            div.innerText = agenda.agenda[0];
+            seletor(".items").append(div)
+            
+        });
+    }
+}
