@@ -1,0 +1,81 @@
+@import url(icons.css);
+@font-face {
+  font-family: "Lato";
+  src: url("Lato.ttf");
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  font-weight: 600;
+  font-family: Lato;
+  word-break: keep-all;
+  text-decoration: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  --color1: #3c5063;
+  --color2: #fa4a4d;
+  --cor3: #ffc10e;
+  --color4: #3db9ec;
+  --color5: #388e3c;
+  --color6: #222332;
+  --color7: #1a1b1e;
+  --atual: #388e3c;
+  background: #eee;
+  overflow-x: hidden;
+}
+
+::scrollbar {
+  width: 0px !important;
+}
+
+*::scrollbar {
+  width: 0px !important;
+}
+
+*::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+*::-moz-scrollbar {
+  width: 0px !important;
+}
+
+*::-ms-scrollbar {
+  width: 0px !important;
+}
+
+*::-moz-osx-scrollbar {
+  width: 0px !important;
+}
+
+*::-o-scrollbar {
+  width: 0px !important;
+}
+
+header {
+  width: 100%;
+  padding: 2rem;
+}
+
+header h3 {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+header ul li {
+  margin: 0 1rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
