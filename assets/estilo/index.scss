@@ -24,7 +24,7 @@ body
     --color5: #388e3c;
     --color6: #222332;
     --color7: #1a1b1e;
-    --atual : #388e3c;
+    --atual : #fff;
 
     background: #eee;
     overflow-x: hidden;	
@@ -63,11 +63,31 @@ header
             margin: 0 1rem;
             cursor: pointer;
             font-weight: 500;
+            position: relative;
             display: inline-block;
 
             &:hover
             {
                 color: var(--padrao);
+
+                ul
+                {
+                    display: block;
+                }
+            }
+
+            ul
+            {
+                display: none;
+                position: absolute;
+                padding: 1rem .9rem;
+                background: #222332;
+
+                li
+                {
+                    display: block;
+                    margin: 1rem 0;
+                }
             }
         }
     }
@@ -154,4 +174,91 @@ section
     flex-flow: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.flex-centro
+{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario
+{
+    z-index: 1;
+    width: 35%;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+    background: #222332;
+
+    @media (max-width: 991px) {
+        width: 50%;
+    }
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
+
+    h3
+    {
+        color: #fff;
+        padding: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
+    div
+    {
+        width: 100%;
+        margin-block: 2rem;
+        border-radius: 3px;
+        background: var(--atual);
+
+        input
+        {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: .5rem;
+            background: transparent;
+        }
+    }
+    button
+    {
+        cursor: pointer;
+        padding: .5rem;
+        margin: 0 auto;
+    }
+}
+
+
+
+.screen
+{
+    z-index: 0;
+    inset: 0px;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    flex-flow: column;
+    justify-content: center;
+
+    &::before
+    {
+        z-index: 0;
+        inset: 0px;
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: fixed;
+        background: rgba(0, 0, 0, .5);
+    }
+    &.on
+    {
+        display: block;
+    }
 }
