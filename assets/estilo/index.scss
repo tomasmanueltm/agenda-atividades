@@ -4,12 +4,17 @@
     font-family: "Lato";
     src: url("Lato.ttf");
 }
+@font-face 
+{
+    font-family: "Poppin";
+    src: url("Poppins.ttf");
+}
 *{  
     margin: 0px;
     padding: 0px;
     list-style: none;
     font-weight: 600;
-    font-family: Lato;
+    font-family: Poppin;
     word-break: keep-all;
     text-decoration: none;
     box-sizing: border-box;
@@ -135,17 +140,15 @@ section
         .adicionar
         {
             right: 0rem;
-            bottom: 2rem;
-            height: 140px;
+            bottom: 2.5rem;
+            height: 145px;
             flex-flow: column;
             position: relative;
             overflow: hidden;
-            width: 555px;
 
             div
             {                
                 width: 125px;
-                height: 40px;
                 cursor: pointer;
                 position: relative;
                 margin-block: .3rem;
@@ -156,12 +159,11 @@ section
                 span
                 {
                     right: -8px;
+                    font-size: .92rem;
                     font-weight: 900;
                     border-radius: 5px;
                     position: relative;
                     padding: .1rem 0px;
-                    display: inline-block;
-                    border-bottom: 1px solid var(--padrao);
                     text-transform: lowercase;
                 }
                 i
@@ -185,7 +187,7 @@ section
             }
             &:hover
             {
-                height: 140px;
+                height: 145px;
                 div
                 {
                     display: flex!important;
@@ -236,13 +238,14 @@ section
     {
         color: #fff;
         padding: 1rem;
-        font-weight: 600;
+        font-weight: 500;
         text-align: center;
+        font-family: Poppin!important;
     }
     div
     {
         width: 100%;
-        margin-block: 2rem;
+        margin-block: 1rem;
         border-radius: 3px;
         background: var(--atual);
 
@@ -257,12 +260,31 @@ section
     }
     button
     {
-        cursor: pointer;
-        padding: .5rem;
+        color: #fff;
         margin: 0 auto;
+        cursor: pointer;
+        font-weight: 400;
+        border-radius: .5rem;
+        padding: .8rem 1.5rem;
+        background: transparent;
+        text-transform: uppercase;
+        border: 1px solid var(--atual);
+
+        &:hover
+        {
+            color: #eee;
+            background: var(--color6);
+        }
     }
 }
-
+.form-agenda
+{
+    display: none;
+    &.screen
+    {
+        // display: flex;
+    }
+}
 
 
 .screen
@@ -271,9 +293,10 @@ section
     inset: 0px;
     width: 100%;
     height: 100vh;
-    display: none;
+    display: flex;
     position: fixed;
     flex-flow: column;
+    align-items: center;
     justify-content: center;
 
     &::before
@@ -286,9 +309,5 @@ section
         display: block;
         position: fixed;
         background: rgba(0, 0, 0, .5);
-    }
-    &.on
-    {
-        display: block;
     }
 }
